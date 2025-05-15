@@ -1,69 +1,51 @@
-variable "resource_group_name" {
-  description = "Name of the resource group to create resources in"
-  type        = string
-  default     = ""
+output "function_app_name" {
+  description = "Name of the deployed Function App"
+  value       = azurerm_linux_function_app.this.name
 }
 
-variable "location" {
-  description = "Azure region to deploy resources to"
-  type        = string
-  default     = "eastus"
+output "function_app_url" {
+  description = "URL of the deployed Function App"
+  value       = "https://${azurerm_linux_function_app.this.default_hostname}/api/SnapshotCleanup"
 }
 
-variable "tags" {
-  description = "Tags to apply to all resources"
-  type        = map(string)
-  default     = {}
+output "function_app_key" {
+  description = "Default Function App key"
+  value       = azurerm_linux_function_app.this.default_function_key
+  sensitive   = true
 }
 
-variable "app_service_sku" {
-  description = "SKU for the App Service Plan"
-  type        = string
-  default     = "B1"
+output "resource_group_name" {
+  description = "Name of the resource group containing all resources"
+  value       = azurerm_resource_group.this.name
 }
 
-variable "specific_subscription_id" {
-  description = "Specific subscription ID to scan (empty means scan all accessible)"
-  type        = string
-  default     = ""
+output "storage_account_name" {
+  description = "Name of the storage account for reports"
+  value       = azurerm_storage_account.this.name
 }
 
-variable "enable_deletion" {
-  description = "Enable deletion of orphaned snapshots"
-  type        = bool
-  default     = false
+output "storage_container_name" {
+  description = "Name of the storage container for reports"
+  value       = azurerm_storage_container.this.name
 }
 
-variable "dry_run" {
-  description = "Perform a dry run (don't actually delete snapshots)"
-  type        = bool
-  default     = true
+output "managed_identity_id" {
+  description = "ID of the managed identity used by the Function App"
+  value       = azurerm_user_assigned_identity.this.id
 }
 
-variable "log_level" {
-  description = "Logging level for the function"
-  type        = string
-  default     = "INFO"
-  validation {
-    condition     = contains(["DEBUG", "INFO", "WARNING", "ERROR"], var.log_level)
-    error_message = "Log level must be one of: DEBUG, INFO, WARNING, ERROR."
-  }
+output "managed_identity_client_id" {
+  description = "Client ID of the managed identity"
+  value       = azurerm_user_assigned_identity.this.client_id
 }
 
-variable "storage_container_name" {
-  description = "Name of the storage container to store reports"
-  type        = string
-  default     = "snapshot-reports"
+output "application_insights_name" {
+  description = "Name of the Application Insights resource"
+  value       = azurerm_application_insights.this.name
 }
 
-variable "schedule_expression" {
-  description = "CRON expression for scheduled execution"
-  type        = string
-  default     = "0 0 0 * * *"  # Daily at midnight
-}
-
-variable "create_custom_role" {
-  description = "Create a custom role for snapshot management"
-  type        = bool
-  default     = false
+output "application_insights_instrumentation_key" {
+  description = "Instrumentation key for Application Insights"
+  value       = azurerm_application_insights.this.instrumentation_key
+  sensitive   = true
 }
