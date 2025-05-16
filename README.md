@@ -1,9 +1,8 @@
 # TerraSnap-Govern
-# Azure Snapshot Cleanup
 
 A comprehensive solution for identifying and managing orphaned Azure snapshots - those whose source disks no longer exist. This tool helps reduce unnecessary storage costs, improve resource management, and address potential compliance issues.
 
-## 🌟 Features
+## Features
 
 - **Orphaned Snapshot Detection**: Automatically identifies snapshots with non-existent source disks
 - **Multi-subscription Support**: Scans across all accessible subscriptions or a specific one
@@ -12,7 +11,7 @@ A comprehensive solution for identifying and managing orphaned Azure snapshots -
 - **Safe Operations**: Default dry-run mode prevents accidental deletions
 - **Cross-platform**: Python and Bash implementations available
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **For Python script**:
   - Python 3.6+
@@ -24,7 +23,7 @@ A comprehensive solution for identifying and managing orphaned Azure snapshots -
   - jq utility for JSON processing
   - Appropriate Azure RBAC permissions
 
-## 🚀 Installation
+## Installation
 
 ### Option 1: Clone Repository
 
@@ -36,7 +35,7 @@ cd azure-snapshot-cleanup
 pip install -r requirements.txt
 ```
 
-## 🛠️ Quick Start
+## Quick Start
 
 ### Python Script
 
